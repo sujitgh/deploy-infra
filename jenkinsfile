@@ -1,0 +1,22 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Hello') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+        stage("Devops") {
+            steps {
+                sh '''
+                    pwd
+                    ls -lrt
+                    mkdir test
+                    cd test
+                    pwd
+                '''
+            }
+        }
+    }
+}
