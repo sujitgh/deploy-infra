@@ -1,7 +1,3 @@
 provider "local" {
 
 }
-
-provider "random" {
-  
-}
