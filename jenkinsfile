@@ -1,6 +1,17 @@
 pipeline {
     agent any
+    parameters {
+        string(name: 'version', defaultValue: '1.20', description: 'version')
+    }
+    environment {
+        VAR1 = 'dev'
+    }
+    tools {
+        maven 'mvn1'
+        jdk 'jdk1.6'
+    }
 
+    
     stages {
         stage('Hello') {
             steps {
@@ -10,12 +21,20 @@ pipeline {
         stage("Devops") {
             steps {
                 sh '''
-                    pwd
-                    ls -lrt
-                    mkdir test
-                    cd test
-                    pwd
+                pwd
+                ls -lrt
+                cd test
+                pwd
                 '''
+            }
+        }
+        stage("print variables") {
+            steps {
+                script {    
+                def version = "${params.version}"
+                sh 'echo $VAR1'
+                sh 'echo $version'                
+            }
             }
         }
     }
